@@ -1,6 +1,7 @@
 #include "http_server.h"
 #include "camera_manager.h"
 #include "wifi_manager.h"
+#include "telegram.h"
 #include "esp_log.h" 
 #include "esp_camera.h"
 #include <nvs_flash.h>
@@ -14,6 +15,7 @@ void app_main(void)
     nvs_flash_init();   
     wifi_init_sta();
     start_webserver();
+    telegram_start();
 #else
     ESP_LOGE(TAG, "Camera support is not available for this chip");
     return;

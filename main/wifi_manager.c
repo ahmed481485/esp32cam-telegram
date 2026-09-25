@@ -1,6 +1,6 @@
 
 #include "wifi_manager.h"
-#include "personal.h"
+#include "my_personal.h"
 
 #include <string.h>
 #include "freertos/FreeRTOS.h"

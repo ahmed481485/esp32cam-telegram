@@ -3,8 +3,9 @@
 #define PERSONAL_H
 
 // Replace with your Wi-Fi credentials
-#define WIFI_SSID "Hi:)" 
-#define WIFI_PASS "wantsomenetdude101"
-
+#define WIFI_SSID "" 
+#define WIFI_PASS ""
+#define TG_BOT_TOKEN ""
+#define TG_CHAT_ID ""
 #endif
 
