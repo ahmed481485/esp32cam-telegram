@@ -40,12 +40,13 @@
 #include <nvs_flash.h>
 #include <sys/param.h>
 #include <string.h>
-
-
-
-
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "camera_pinout.h"
+
+#if defined(CONFIG_CAMERA_AF_SUPPORT) && CONFIG_CAMERA_AF_SUPPORT
+#include "esp_camera_af.h"
+#endif
 
 // support IDF 5.x
 #ifndef portTICK_RATE_MS
@@ -60,15 +61,11 @@
 #include "esp_event.h"
 #include "freertos/event_groups.h"
 
-#if defined(CONFIG_CAMERA_AF_SUPPORT) && CONFIG_CAMERA_AF_SUPPORT
-#include "esp_camera_af.h"
-#endif
-
-#include "camera_pinout.h"
 
 
-#define WIFI_SSID "Hi:)"
-#define WIFI_PASS "wantsomenetdude101"
+
+#define WIFI_SSID "Xiaomi14"
+#define WIFI_PASS "wantsomeint"
 
 static EventGroupHandle_t s_wifi_event_group;
 #define WIFI_CONNECTED_BIT BIT0
@@ -187,24 +184,21 @@ esp_err_t camera_init(){
     return ESP_OK;
 }
 
-esp_err_t camera_capture(){
-    //acquire a frame
-    ESP_LOGI(TAG, "Taking picture...");
-    camera_fb_t * fb = esp_camera_fb_get();
-    if (!fb) {
-        ESP_LOGE(TAG, "Camera Capture Failed");
-        return ESP_FAIL;
-    }
-    ESP_LOGI(TAG, "Picture taken! Its size was: %zu bytes", fb->len);
-    //replace this with your own function
-    //process_image(fb->width, fb->height, fb->format, fb->buf, fb->len);
-
-
-    //return the frame buffer back to the driver for reuse
-    esp_camera_fb_return(fb);
-    return ESP_OK;
-}
-
+// esp_err_t camera_capture(){
+//     //acquire a frame
+//     ESP_LOGI(TAG, "Taking picture...");
+//     camera_fb_t * fb = esp_camera_fb_get();
+//     if (!fb) {
+//         ESP_LOGE(TAG, "Camera Capture Failed");
+//         return ESP_FAIL;
+//     }
+//     ESP_LOGI(TAG, "Picture taken! Its size was: %zu bytes", fb->len);
+//     //replace this with your own function
+//     //process_image(fb->width, fb->height, fb->format, fb->buf, fb->len);
+//     //return the frame buffer back to the driver for reuse
+//     esp_camera_fb_return(fb);
+//     return ESP_OK;
+// }
 typedef struct {
         httpd_req_t *req;
         size_t len;
@@ -333,8 +327,6 @@ esp_err_t jpg_stream_httpd_handler(httpd_req_t *req){
     last_frame = 0;
     return res;
 }
-
-
 
 httpd_handle_t start_webserver(void)
 {
