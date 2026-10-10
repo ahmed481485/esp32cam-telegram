@@ -1,8 +1,11 @@
 # ESP32-S3 Camera Telegram Bot
 
+
 Take pictures with an ESP32-S3 camera board by sending a command to a Telegram bot.
 
 Built with ESP-IDF as a hands-on project to learn the framework, FreeRTOS tasks, and HTTP(S) communication over TCP/IP.
+
+<img src="files/photos/board.png" alt="Device" width="49%"> <img src="files/photos/telegram.jpg" alt="Telegram chat" width="49%">
 
 ## Features
 
@@ -83,8 +86,5 @@ main/
 └── personal.h         Credentials (not committed)
 ```
 
-## Gallery
 
-[Device](files/photos/device.jpg) <!--will be added later>
-[Telegram chat](files/photos/telegram.jpg) <!--will be added later>
 
